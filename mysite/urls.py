@@ -16,15 +16,8 @@ Including another URLconf
 
 from django.conf.urls import include, url
 from django.contrib import admin
-admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/django-ses/', include('django_ses.urls')),
-    url(r'^api/1.0/', include('feedcrunch_api_v1.urls')),
-    url(r'^oauth/', include('oauth.urls')),
-    url(r'^@(?P<feedname>\w+)/admin/', include('feedcrunch_rssadmin.urls')),
-    url(r'^@(?P<feedname>\w+)/', include('feedcrunch_rssviewer.urls')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'', include('feedcrunch_home.urls')),
+    url(r'', include('blog.urls')),
 ]
