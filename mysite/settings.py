@@ -25,7 +25,11 @@ SECRET_KEY = 'vey86(ztjd1v45c18g_30(9trmzx@jl+!63w&xk45f3h+(*=p*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["smartmark01.herokuapp.com"]
+ALLOWED_HOSTS = [
+    "smartmark01.herokuapp.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 
 # Application definition
