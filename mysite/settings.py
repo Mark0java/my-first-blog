@@ -124,10 +124,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # DEBUG = False
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
-
-
 
 # ##############################################
 # For work with development/production settings
