@@ -14,9 +14,9 @@ def view_store(request):
     
     Indicators(
         A=float(indicators['A'][0]),
-        V=float(indicators['A'][0]),
-        W=float(indicators['A'][0]),
-        socket_id=int(indicators['A'][0]),
+        V=float(indicators['V'][0]),
+        W=float(indicators['W'][0]),
+        socket_id=int(indicators['socket_id'][0]),
     ).save()
     return HttpResponse(json.dumps(result))
 
@@ -26,6 +26,7 @@ def view_info(request):
     indicators = Indicators.objects.all()
     for ind in indicators:
         result.append({'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id, "timestamp": str(ind.timestamp)})
+        
     return HttpResponse(json.dumps(result, indent=4))
     
 
