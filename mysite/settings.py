@@ -116,6 +116,11 @@ DATABASES = {
     }
 }
 
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
