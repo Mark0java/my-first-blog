@@ -23,6 +23,15 @@ def view_store(request):
 
 def view_info(request):
     result = []
+    indicators = Indicators.objects.latest('timestamp')
+    for ind in indicators:
+        result.append({'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id})
+  
+    return HttpResponse(json.dumps(result, indent=4))
+    
+    
+def view_info(request):
+    result = []
     indicators = Indicators.objects.all()
     for ind in indicators:
         result.append({'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id, "timestamp": str(ind.timestamp)})
