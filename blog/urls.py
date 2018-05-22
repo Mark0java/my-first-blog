@@ -9,4 +9,5 @@ urlpatterns = [
     # url(r'^dashboard$', views.dashboard, name='dashboard'),
     url(r'^store$', views.view_store, name='store'),
     url(r'^info$', views.view_info, name='info'),
+    url(r'^history$', views.view_history, name='history'),
 ]
