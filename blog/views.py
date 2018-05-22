@@ -24,7 +24,7 @@ def view_store(request):
 def view_info(request):
     result = []
     ind = Indicators.objects.latest('timestamp') 
-    result={'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id}
+    result.append({'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id})
   
     return HttpResponse(json.dumps(result, indent=4))
     
