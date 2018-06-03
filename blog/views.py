@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def view_store(request):
-    indicators = dict(request.GET)
+    indicators = dict(request.POST)
     result = {'status': 'ok', 'indicators': indicators}
     
     Indicators(
