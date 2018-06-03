@@ -19,6 +19,14 @@ def view_store(request):
         socket_id=int(indicators['socket_id'][0]),
     ).save()
     return HttpResponse(json.dumps(result))
+    
+    
+def on_off(request):
+    on_off1 = dict(request.POST)
+    result1 = {'status': 'ok', 'on_off': on_off}
+    
+    On_Off(on_off2=float(on_off[0])).save()
+    return HttpResponse(json.dumps(result1))    
 
 
 def view_info(request):

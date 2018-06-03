@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^store$', views.view_store, name='store'),
     url(r'^info$', views.view_info, name='info'),
     url(r'^history$', views.view_history, name='history'),
+    url(r'^on_off$', views.view_on_off, name='on_off'),
 ]
