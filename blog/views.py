@@ -5,7 +5,7 @@ from .models import Post
 from .forms import PostForm
 from .models import Indicators
 from django.views.decorators.csrf import csrf_exempt
-
+from .models import On_Off
 
 @csrf_exempt
 def view_store(request):

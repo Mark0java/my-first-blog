@@ -23,3 +23,6 @@ class Indicators(models.Model):
 	W = models.FloatField()
 	socket_id = models.IntegerField()
 	timestamp = models.DateTimeField(default=timezone.now)
+
+class On_Off(models.Model):
+        on_off = models.FloatField()
