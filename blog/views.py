@@ -21,12 +21,19 @@ def view_store(request):
     return HttpResponse(json.dumps(result))
     
     
-def on_off(request):
+def view_on_off(request):
     on_off1 = dict(request.POST)
     result1 = {'status': 'ok', 'on_off': on_off}
     
     On_Off(on_off2=float(on_off[0])).save()
-    return HttpResponse(json.dumps(result1))    
+    return HttpResponse(json.dumps(result1))
+
+def view_on_off1(request):
+    result = []
+    ind_on = On_Off.objects.all() 
+    result.append({'on_off': ind_on.on_off2})
+  
+    return HttpResponse(json.dumps(result, indent=4))    
 
 
 def view_info(request):
