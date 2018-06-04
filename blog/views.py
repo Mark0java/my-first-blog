@@ -23,7 +23,6 @@ def view_store(request):
     
 def view_on_off(request):
     on_off = dict(request.POST)
-    result1 = on_off
     On_Off(
     on_off=float(on_off[0]),
     ).save()
