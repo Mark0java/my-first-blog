@@ -22,11 +22,11 @@ def view_store(request):
     
     
 def view_on_off(request):
-    on_off = dict(request.POST)
+    on_off1 = dict(request.POST)
     result = {'status': 'ok', 'on_off': on_off}
     On_Off(
     id=1
-    on_off = float(on_off[0]),
+    on_off = float(on_off1[0]),
     ).save()
     return HttpResponse(json.dumps(result))
 
