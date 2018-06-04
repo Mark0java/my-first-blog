@@ -19,23 +19,7 @@ def view_store(request):
         socket_id=int(indicators['socket_id'][0]),
     ).save()
     return HttpResponse(json.dumps(result))
-    
-    
-def view_on_off(request):
-    on_off = dict(request.POST)
-    result1 = {'status': 'ok', 'on_off': on_off}
-    
-    On_Off(on_off2=float(on_off[0])).save()
-    return HttpResponse(json.dumps(result1))
-
-def view_on_off1(request):
-    result = []
-    ind_on = On_Off.objects.all() 
-    result.append({'on_off': ind_on.on_off})
   
-    return HttpResponse(json.dumps(result, indent=4))    
-
-
 def view_info(request):
     result = []
     ind = Indicators.objects.latest('timestamp') 
@@ -50,7 +34,25 @@ def view_history(request):
     for ind in indicators:
         result.append({'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id, "timestamp": str(ind.timestamp)})
         
-    return HttpResponse(json.dumps(result, indent=4))
+    return HttpResponse(json.dumps(result, indent=4))  
+    
+def view_on_off(request):
+    on_off = dict(request.POST)
+    result1 = on_off
+    On_Off(
+    on_off=float(on_off[0]),
+    ).save()
+    return HttpResponse(json.dumps(on_off))
+
+def view_on_off1(request):
+    result = []
+    ind_on = On_Off.objects.all() 
+    result.append({'on_off': ind_on.on_off})
+  
+    return HttpResponse(json.dumps(result, indent=4))    
+
+
+
     
 
 def post_list(request):
