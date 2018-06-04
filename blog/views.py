@@ -25,21 +25,20 @@ def view_store(request):
 @csrf_exempt
 def view_set_on_off(request):
     on_off = dict(request.POST)
-    print("Server retrieved data from mobile: '%s'" % on_off)
+    value = float(on_off['on_off'][0])
+    print("Server retrieved data from mobile: '%s'. Save to database: %s" % (on_off, value))
 
-    result = {'status': 'ok', 'on_off': on_off}
-    o = On_Off.objects.get_or_create(id=1)
-    o.on_off = float(on_off['onoff'])
+    o, is_new = On_Off.objects.get_or_create(id=1, defaults={'on_off': 0})
+    o.on_off = value
     o.save()
-    return HttpResponse(json.dumps(result))
+    return HttpResponse(json.dumps({'status': 'ok', 'on_off': on_off}))
 
 
 def view_get_on_off(request):
-    result = []
-    ind_on = On_Off.objects.get(id=1) 
-    result.append({'on_off': ind_on.on_off})
-  
-    return HttpResponse(json.dumps(result, indent=4))    
+    ind_on = On_Off.objects.get(id=1)
+    response = json.dumps({'on_off': ind_on.on_off}, indent=4)
+    print(response)
+    return HttpResponse(response)
 
 
 def view_info(request):
