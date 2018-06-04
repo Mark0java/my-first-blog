@@ -26,7 +26,7 @@ def view_on_off(request):
     result = {'status': 'ok', 'on_off': on_off}
     On_Off(
     id=1
-    on_off=float(on_off[0]),
+    on_off = float(on_off[0]),
     ).save()
     return HttpResponse(json.dumps(result))
 
