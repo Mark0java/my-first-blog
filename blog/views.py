@@ -25,13 +25,14 @@ def view_on_off(request):
     on_off = dict(request.POST)
     result = {'status': 'ok', 'on_off': on_off}
     On_Off(
+    id=1
     on_off=float(on_off[0]),
     ).save()
     return HttpResponse(json.dumps(result))
 
 def view_on_off1(request):
     result = []
-    ind_on = On_Off.objects.latest() 
+    ind_on = On_Off.objects.get(id=1) 
     result.append({'on_off': ind_on.on_off})
   
     return HttpResponse(json.dumps(result, indent=4))    
