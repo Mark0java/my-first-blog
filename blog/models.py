@@ -16,13 +16,14 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-		
+
 class Indicators(models.Model):
-	V = models.FloatField()
-	A = models.FloatField()
-	W = models.FloatField()
-	socket_id = models.IntegerField()
-	timestamp = models.DateTimeField(default=timezone.now)
+    V = models.FloatField()
+    A = models.FloatField()
+    W = models.FloatField()
+    socket_id = models.IntegerField()
+    timestamp = models.DateTimeField(default=timezone.now)
+
 
 class On_Off(models.Model):
-        on_off = models.FloatField()
+    on_off = models.FloatField()

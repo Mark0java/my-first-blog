@@ -1,11 +1,12 @@
 import json
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from django.utils import timezone
 from .models import Post
 from .forms import PostForm
 from .models import Indicators
 from django.views.decorators.csrf import csrf_exempt
 from .models import On_Off
+
 
 @csrf_exempt
 def view_store(request):
@@ -20,17 +21,18 @@ def view_store(request):
     ).save()
     return HttpResponse(json.dumps(result))
     
-    
-def view_on_off(request):
-    on_off1 = dict(request.POST)
+
+@csrf_exempt
+def view_set_on_off(request):
+    on_off = dict(request.POST)
     result = {'status': 'ok', 'on_off': on_off}
-    On_Off(
-    id=1,
-    on_off = float(on_off1[0]),
-    ).save()
+    o = On_Off.objects.get_or_create(id=1)
+    o.on_off = float(on_off['value'])
+    o.save()
     return HttpResponse(json.dumps(result))
 
-def view_on_off1(request):
+
+def view_get_on_off(request):
     result = []
     ind_on = On_Off.objects.get(id=1) 
     result.append({'on_off': ind_on.on_off})
