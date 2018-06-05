@@ -25,7 +25,7 @@ def view_store(request):
 @csrf_exempt
 def view_set_on_off(request):
     on_off = dict(request.POST)
-    value = float(on_off['on_off'][0])
+    value = int(on_off['on_off'][0])
     print("Server retrieved data from mobile: '%s'. Save to database: %s" % (on_off, value))
 
     o, is_new = On_Off.objects.get_or_create(id=1, defaults={'on_off': 0})
