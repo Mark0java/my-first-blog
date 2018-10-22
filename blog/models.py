@@ -26,4 +26,5 @@ class Indicators(models.Model):
 
 
 class On_Off(models.Model):
-    on_off = models.FloatField()
+    on_off = models.FloatField(default=0)
+    user = models.IntegerField()

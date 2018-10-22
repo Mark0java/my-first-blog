@@ -1,7 +1,7 @@
 import requests
 
-BASE_URL = 'https://smartmark01.herokuapp.com'
-# BASE_URL = 'http://localhost:8000'
+# BASE_URL = 'https://smartmark01.herokuapp.com'
+BASE_URL = 'http://localhost:8000'
 
 def main():
     # WRITE DATA
@@ -12,5 +12,5 @@ def main():
     response = requests.get(BASE_URL + '/info')
     print(response.content)
 
-    
-main()
+if __name__ == "__main__":
+    main()

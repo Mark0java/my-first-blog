@@ -117,8 +117,8 @@ DATABASES = {
 }
 
 # Parse database configuration from $DATABASE_URL
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config()
 
 
 # Static files (CSS, JavaScript, Images)
@@ -133,7 +133,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # ##############################################
 # For work with development/production settings
 # ##############################################
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass
+#

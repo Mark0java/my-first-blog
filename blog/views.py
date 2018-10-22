@@ -22,39 +22,42 @@ def view_store(request):
     return HttpResponse(json.dumps(result))
     
 
-@csrf_exempt
+# @csrf_exempt
 def view_set_on_off(request):
-    on_off = dict(request.POST)
-    value = float(on_off['on_off'][0])
-    print("Server retrieved data from mobile: '%s'. Save to database: %s" % (on_off, value))
-
-    o, is_new = On_Off.objects.get_or_create(id=1, defaults={'on_off': 0})
-    o.on_off = value
-    o.save()
-    return HttpResponse(json.dumps({'status': 'ok', 'on_off': on_off}))
+    if request.method == "POST":
+        value = dict(request.POST).get('on_off')
+        # print("Server retrieved data from mobile: '%s'. Save to database: %s" % (on_off, value))
+        # DO NOT PRINT ANYTHING !!!!!!  use .format instead %
+        if value and isinstance(value, list):
+            value = value[0]
+            o, is_new = On_Off.objects.get_or_create(user=request.user.id, on_off=value)
+            o.save()
+            return HttpResponse(json.dumps({'status': 'ok', 'on_off': value}))
+    return HttpResponse(json.dumps({'status': 'invalid'}))
 
 
 def view_get_on_off(request):
-    ind_on = On_Off.objects.get(id=1)
+    ind_on = get_object_or_404(On_Off, user=request.user.id) #On_Off.objects.get(user=request.user.id)
     response = json.dumps({'on_off': ind_on.on_off}, indent=4)
-    print(response)
-    return HttpResponse(esponse)
+    return HttpResponse(response)
 
 
 def view_info(request):
     result = []
-    ind = Indicators.objects.latest('timestamp') 
-    result.append({'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id})
-  
+    try:
+        ind = Indicators.objects.latest('timestamp')
+        result.append({'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id})
+    except Indicators.DoesNotExist:
+        pass
     return HttpResponse(json.dumps(result, indent=4))
     
     
 def view_history(request):
     result = []
-    indicators = Indicators.objects.all()
-    for ind in indicators:
-        result.append({'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id, "timestamp": str(ind.timestamp)})
-        
+    try:
+        result = [{'W': ind.W, 'A': ind.A, 'V': ind.V, 'socket_id': ind.socket_id, "timestamp": str(ind.timestamp)} for ind in Indicators.objects.all()]
+    except Indicators.DoesNotExist:
+        pass
     return HttpResponse(json.dumps(result, indent=4))
     
 

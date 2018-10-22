@@ -1,10 +1,10 @@
 Django
-dj-database-url
-dj-static
+#dj-database-url
+#dj-static
 gunicorn
 heroku
-psycopg2
-static
+#psycopg2
+#static
 whitenoise
 
 requests
