@@ -23,23 +23,6 @@ def view_store(request):
     
 
 @csrf_exempt
-def view_set_on_off(request):
-    on_off = dict(request.POST)
-    value = float(on_off['on_off'][0])
-    print("Server retrieved data from mobile: '%s'. Save to database: %s" % (on_off, value))
-
-    o, is_new = On_Off.objects.get_or_create(id=1, defaults={'on_off': 0})
-    o.on_off = value
-    o.save()
-    return HttpResponse(json.dumps({'status': 'ok', 'on_off': on_off}))
-
-
-def view_get_on_off(request):
-    ind_on = On_Off.objects.get(id=1)
-    response = json.dumps({'on_off': ind_on.on_off}, indent=4)
-    print(response)
-    return HttpResponse(esponse)
-
 
 def view_info(request):
     result = []
@@ -80,3 +63,21 @@ def post_new(request):
     else:
         form = PostForm()
     return render(request, 'blog/post_edit.html', {'form': form})
+
+    
+def view_set_on_off(request):
+    on_off = dict(request.POST)
+    value = float(on_off['on_off'][0])
+    print("Server retrieved data from mobile: '%s'. Save to database: %s" % (on_off, value))
+
+    o, is_new = On_Off.objects.get_or_create(id=1, defaults={'on_off': 0})
+    o.on_off = value
+    o.save()
+    return HttpResponse(json.dumps({'status': 'ok', 'on_off': on_off}))
+
+
+def view_get_on_off(request):
+    ind_on = On_Off.objects.get(id=1)
+    response = json.dumps({'on_off': ind_on.on_off}, indent=4)
+    print(response)
+    return HttpResponse(esponse)
