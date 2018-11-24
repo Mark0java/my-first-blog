@@ -80,4 +80,4 @@ def view_get_on_off(request):
     ind_on = On_Off.objects.get(id=1)
     response = json.dumps({'on_off': ind_on.on_off}, indent=4)
     print(response)
-    return HttpResponse(esponse)
+    return HttpResponse(response)
