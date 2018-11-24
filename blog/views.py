@@ -47,7 +47,7 @@ def view_set_on_off(request):
 
 
 def view_get_on_off(request):
-    ind_on = get_object_or_404(On_Off, user=request.user.id) #On_Off.objects.get(user=request.user.id)
+    ind_on = On_Off.objects.latest('timestamp')
     response = json.dumps({'on_off': ind_on.on_off}, indent=4)
     return HttpResponse(response)
 
