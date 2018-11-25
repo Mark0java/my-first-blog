@@ -27,7 +27,7 @@ def view_set_on_off(request):
     result = {'status': 'ok', 'indicators': indica}
 
     On_Off(
-        on_off=indica['switch-state'],
+        on_off=indica[2][4]['switch-state'],
     ).save()
     return HttpResponse(json.dumps(result))
     
@@ -50,6 +50,11 @@ def view_get_on_off(request):
     ind_on = On_Off.objects.latest('timestamp')
     response = json.dumps({'on_off': ind_on.on_off}, indent=4)
     return HttpResponse(response)
+
+# def view_get_on_off(request):
+#     ind_on = get_object_or_404(On_Off, user=request.user.id) #On_Off.objects.get(user=request.user.id)
+#     response = json.dumps({'on_off': ind_on.on_off}, indent=4)
+#     return HttpResponse(response)
 
 
 def view_info(request):
