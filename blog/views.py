@@ -6,6 +6,7 @@ from .forms import PostForm
 from .models import Indicators
 from django.views.decorators.csrf import csrf_exempt
 from .models import On_Off
+from .models import On_Off_google
 
 
 @csrf_exempt
