@@ -32,3 +32,4 @@ class On_Off_google(models.Model):
 class On_Off(models.Model):
     on_off = models.FloatField(default=0)
     user = models.IntegerField()
+    timestamp = models.DateTimeField(blank=True, null=True)
