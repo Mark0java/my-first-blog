@@ -22,28 +22,28 @@ def view_store(request):
     return HttpResponse(json.dumps(result))
 
 
-def view_set_on_off(request):
+def view_set_on_off_google(request):
     indica = dict(request.POST)
     result = {'status': 'ok', 'indicators': indica}
 
-    On_Off(
+    On_Off_google(
         on_off=indica[2][4]['switch-state'],
     ).save()
     return HttpResponse(json.dumps(result))
     
 
-# @csrf_exempt
-# def view_set_on_off(request):
-#     if request.method == "POST":
-#         value = dict(request.POST).get('on_off')
-#         # print("Server retrieved data from mobile: '%s'. Save to database: %s" % (on_off, value))
-#         # DO NOT PRINT ANYTHING !!!!!!  use .format instead %
-#         if value and isinstance(value, list):
-#             value = value[0]
-#             o, is_new = On_Off.objects.get_or_create(user=request.user.id, on_off=value)
-#             o.save()
-#             return HttpResponse(json.dumps({'status': 'ok', 'on_off': value}))
-#     return HttpResponse(json.dumps({'status': 'invalid'}))
+@csrf_exempt
+def view_set_on_off(request):
+    if request.method == "POST":
+        value = dict(request.POST).get('on_off')
+        # print("Server retrieved data from mobile: '%s'. Save to database: %s" % (on_off, value))
+        # DO NOT PRINT ANYTHING !!!!!!  use .format instead %
+        if value and isinstance(value, list):
+            value = value[0]
+            o, is_new = On_Off.objects.get_or_create(user=request.user.id, on_off=value)
+            o.save()
+            return HttpResponse(json.dumps({'status': 'ok', 'on_off': value}))
+    return HttpResponse(json.dumps({'status': 'invalid'}))
 
 
 def view_get_on_off(request):
