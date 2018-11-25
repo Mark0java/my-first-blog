@@ -26,7 +26,7 @@ class Indicators(models.Model):
 
 
 class On_Off_google(models.Model):
-    on_off = models.FloatField()
+    on_off = models.FloatField(default=0)
 
 
 class On_Off(models.Model):
