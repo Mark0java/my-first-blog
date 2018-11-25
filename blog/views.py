@@ -41,21 +41,21 @@ def view_set_on_off(request):
         # DO NOT PRINT ANYTHING !!!!!!  use .format instead %
         if value and isinstance(value, list):
             value = value[0]
-            o, is_new = On_Off.objects.get_or_create(user=request.user.id, on_off=value, timestamp=timezone.now())
+            o, is_new = On_Off.objects.get_or_create(user=request.user.id, on_off=value)
             o.save()
             return HttpResponse(json.dumps({'status': 'ok', 'on_off': value}))
     return HttpResponse(json.dumps({'status': 'invalid'}))
 
 
-def view_get_on_off(request):
-    ind_on = On_Off.objects.latest('timestamp')
-    response = json.dumps({'on_off': ind_on.on_off}, indent=4)
-    return HttpResponse(response)
-#
 # def view_get_on_off(request):
-#     ind_on = get_object_or_404(On_Off, user=request.user.id) #On_Off.objects.get(user=request.user.id)
+#     ind_on = On_Off.objects.latest('timestamp')
 #     response = json.dumps({'on_off': ind_on.on_off}, indent=4)
 #     return HttpResponse(response)
+#
+def view_get_on_off(request):
+    ind_on = get_object_or_404(On_Off, user=request.user.id) #On_Off.objects.get(user=request.user.id)
+    response = json.dumps({'on_off': ind_on.on_off}, indent=4)
+    return HttpResponse(response)
 
 
 def view_info(request):
