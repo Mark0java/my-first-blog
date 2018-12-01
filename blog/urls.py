@@ -11,6 +11,6 @@ urlpatterns = [
     url(r'^info$', views.view_info, name='info'),
     url(r'^history$', views.view_history, name='history'),
     url(r'^set_on_off$', views.view_set_on_off, name='set_on_off'),
-    url(r'^set_on_off_google$', views.view_set_on_off_google, name='set_on_off_google'),
+    # url(r'^set_on_off_google$', views.view_set_on_off_google, name='set_on_off_google'),
     url(r'^get_on_off$', views.view_get_on_off, name='get_on_off'),
 ]

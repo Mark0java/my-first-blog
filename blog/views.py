@@ -6,31 +6,61 @@ from .forms import PostForm
 from .models import Indicators
 from django.views.decorators.csrf import csrf_exempt
 from .models import On_Off
-from .models import On_Off_google
+from dialogflow_lite.dialogflow import Dialogflow
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
+from .models import Bright
 
 
 @csrf_exempt
+@require_http_methods(['POST'])
+@csrf_exempt
 def view_store(request):
-    indicators = dict(request.POST)
-    result = {'status': 'ok', 'indicators': indicators}
-    
+    client_access_token = 'a4074b8968b642569227649d49ea41eb'
+    dialogflow = Dialogflow(client_access_token=client_access_token)
+    input_dict = convert(request.body)
+    input_text = json.loads(input_dict)['queryResult']['parameters']
+    responses = dialogflow.text_request(str(input_text))
+    print(input_text)
     Indicators(
-        A=float(indicators['A'][0]),
-        V=float(indicators['V'][0]),
-        W=float(indicators['W'][0]),
-        socket_id=int(indicators['socket_id'][0]),
+        A=float(input_text['A']),
+        V=float(input_text['V']),
+        W=float(input_text['W']),
+        socket_id=float(input_text['socket_id']),
     ).save()
+
+    if request.method == "POST":
+        data = {'': 'ok'}
+        return JsonResponse(data, status=200)
+
+
+
+
+def brightnees(request):
+    values = dict(request.POST)
+    result = {'status': 'ok', 'value': values}
+
+    Bright(value=values).save()
     return HttpResponse(json.dumps(result))
 
 
-def view_set_on_off_google(request):
-    indica = dict(request.POST)
-    result = {'status': 'ok', 'indicators': indica}
 
-    On_Off_google(
-        on_off=indica[2][4]['switch-state'],
-    ).save()
-    return HttpResponse(json.dumps(result))
+
+
+
+
+# @csrf_exempt
+# def view_store(request):
+#     indicators = dict(request.POST)
+#     result = {'status': 'ok', 'indicators': indicators}
+#
+#     Indicators(
+#         A=float(indicators['A'][0]),
+#         V=float(indicators['V'][0]),
+#         W=float(indicators['W'][0]),
+#         socket_id=int(indicators['socket_id'][0]),
+#     ).save()
+#     return HttpResponse(json.dumps(result))
     
 
 @csrf_exempt
@@ -54,7 +84,7 @@ def view_set_on_off(request):
 #
 def view_get_on_off(request):
     ind_on = get_object_or_404(On_Off, user=request.user.id) #On_Off.objects.get(user=request.user.id)
-    response = json.dumps({'on_off': ind_on.on_off}, indent=4)
+    response = json.dumps ({'on_off': ind_on.on_off}, indent=4)
     return HttpResponse(response)
 
 

@@ -5,7 +5,7 @@ BASE_URL = 'https://smartmark01.herokuapp.com'
 
 def main():
     # WRITE DATA
-    response = requests.post(BASE_URL + '/store', data={'V': 22, 'A': 3, 'W': 4, "socket_id": 1})
+    response = requests.post(BASE_URL + '/store', data={'V': 22220, 'A': 3, 'W': 4, "socket_id": 1})
     print(response.content)
     
     # READ DATA from Server

@@ -2,6 +2,11 @@ from django.db import models
 from django.utils import timezone
 
 
+
+
+class Bright(models.Model):
+    value = models.IntegerField()
+
 class Post(models.Model):
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
