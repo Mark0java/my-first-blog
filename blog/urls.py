@@ -7,6 +7,7 @@ urlpatterns = [
     url(r'^post/new/$', views.post_new, name='post_new'),
     
     # url(r'^dashboard$', views.dashboard, name='dashboard'),
+    url(r'^bright$', views.brightnees(), name='brightnees'),
     url(r'^store$', views.view_store, name='store'),
     url(r'^info$', views.view_info, name='info'),
     url(r'^history$', views.view_history, name='history'),
